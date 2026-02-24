@@ -2,10 +2,6 @@
   "version": 2,
   "buildCommand": "next build",
   "outputDirectory": ".next",
-  "env": {
-    "STRIPE_SECRET_KEY": "@stripe_secret_key",
-    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "@stripe_publishable_key"
-  },
   "routes": [
     {
       "src": "/api/create-checkout-session",

@@ -16,7 +16,7 @@ export default function Success() {
           <Text>
             We're preparing your AI-powered content calendar. You'll receive access details shortly.
           </Text>
-          <Button colorScheme="blue" onClick={() => router.push('/dashboard')}>
+          <Button colorPalette="blue" onClick={() => router.push('/dashboard')}>
             Go to Dashboard
           </Button>
         </VStack>

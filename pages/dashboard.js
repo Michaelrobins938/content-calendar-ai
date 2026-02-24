@@ -1,10 +1,8 @@
-import { Box, Container, Grid, Heading, Text, VStack, useColorModeValue } from '@chakra-ui/react'
+import { Box, Container, Grid, Heading, Text, VStack } from '@chakra-ui/react'
 
 export default function Dashboard() {
-  const bg = useColorModeValue('gray.50', 'gray.900')
-
   return (
-    <Box bg={bg} minH="100vh" py={10}>
+    <Box bg="gray.50" minH="100vh" py={10}>
       <Container maxW="container.xl">
         <VStack spacing={8} align="stretch">
           <Heading>Your Content Calendar</Heading>

@@ -1,5 +1,4 @@
 import Stripe from 'stripe'
-import { buffer } from 'micro'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
@@ -8,6 +7,14 @@ export const config = {
   api: {
     bodyParser: false,
   },
+}
+
+async function buffer(readable) {
+  const chunks = []
+  for await (const chunk of readable) {
+    chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk)
+  }
+  return Buffer.concat(chunks)
 }
 
 export default async function handler(req, res) {
@@ -31,15 +38,12 @@ export default async function handler(req, res) {
     switch (event.type) {
       case 'customer.subscription.created':
         const subscription = event.data.object
-        // Handle new subscription
         await handleNewSubscription(subscription)
         break
       case 'customer.subscription.updated':
-        // Handle subscription update
         await handleSubscriptionUpdate(event.data.object)
         break
       case 'customer.subscription.deleted':
-        // Handle subscription cancellation
         await handleSubscriptionCancellation(event.data.object)
         break
       default:
@@ -54,19 +58,13 @@ export default async function handler(req, res) {
 }
 
 async function handleNewSubscription(subscription) {
-  // Here we would:
-  // 1. Create user account if needed
-  // 2. Initialize their calendar
-  // 3. Send welcome email
   console.log('New subscription:', subscription.id)
 }
 
 async function handleSubscriptionUpdate(subscription) {
-  // Handle plan changes, payment issues, etc.
   console.log('Subscription updated:', subscription.id)
 }
 
 async function handleSubscriptionCancellation(subscription) {
-  // Clean up user data, send feedback survey, etc.
   console.log('Subscription cancelled:', subscription.id)
 }
